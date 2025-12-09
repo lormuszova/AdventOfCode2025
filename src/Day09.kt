@@ -11,7 +11,7 @@ fun main() {
 
     fun part2(input: List<String>): Long {
         val coordinates = saveCoordinates(input)
-        val xRanges = createAllXRanges(coordinates) // Calculate ONCE
+        val xRanges = createAllXRanges(coordinates)
 
         val coordinatesOrdered = coordinatesSortedBySquareArea(saveCoordinates(input))
         coordinatesOrdered.forEach {
@@ -39,7 +39,7 @@ private fun saveCoordinates(input: List<String>): List<Coordinate2D> {
 private fun coordinatesSortedBySquareArea(coordinates: List<Coordinate2D>): List<Triple<Coordinate2D, Coordinate2D, Long>> {
     return coordinates.flatMapIndexed { index, c1 ->
         coordinates.drop(index + 1).map { c2 ->
-            Triple(c1, c2, c1.getLargestRectangle(c2))
+            Triple(c1, c2, c1.rectangleAreaWithBoundaryTile(c2))
         }
     }.sortedByDescending { it.third }
 }

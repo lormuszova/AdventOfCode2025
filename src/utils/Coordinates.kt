@@ -3,7 +3,11 @@ package utils
 import kotlin.math.abs
 
 data class Coordinate2D(val x: Int, val y: Int) {
-    fun getLargestRectangle(other: Coordinate2D): Long {
+    /**
+     * Calculates the area of the rectangle formed by this coordinate and [other] as opposite corners.
+     * Includes the boundary tiles (integer grid logic).
+     */
+    fun rectangleAreaWithBoundaryTile(other: Coordinate2D): Long {
         val dx = abs((other.x - this.x).toLong()) + 1L
         val dy = abs((other.y - this.y).toLong()) + 1L
         return dx * dy
